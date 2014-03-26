@@ -26,7 +26,7 @@ let draw_background () =
       set_color (rgb 128 128 128);
       fill_rect 0 0 (size_x ()) (size_y ());
       set_color black
-    end
+    end;
   for a = 0 to 4 do
     fill_rect 0 (a * (border + side)) size border;
     fill_rect (a * (border + side)) 0  border size
