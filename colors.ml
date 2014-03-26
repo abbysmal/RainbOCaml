@@ -44,6 +44,9 @@ let init_grid () =
     grid
 
 let add c1 c2 = match c1, c2 with
+  | Empty, _
+  | _, Empty -> Failed
+  | Color cc1, Color cc2 -> match cc1, cc2 with
     | Red, Blue
     | Blue, Red -> Success(Magenta)
     | Green, Blue
@@ -59,6 +62,9 @@ let add c1 c2 = match c1, c2 with
     | _ -> Failed
 
 let sub c1 c2 = match c1, c2 with
+  | Empty, _
+  | _, Empty -> Failed
+  | Color cc1, Color cc2 -> match cc1, cc2 with
     | Yellow, Magenta
     | Magenta, Yellow -> Success(Red)
     | Cyan, Magenta
@@ -85,9 +91,9 @@ let fusion f direction grid =
         match next_case with
             | Some case -> begin
                 match (f case (grid.(y).(x))) with
-                    | Success color as value -> set_next_case grid value y x direction
+                    | Success color as value -> set_next_case grid (Color color) y x direction
                     | Failed -> ()
                     | Win -> ()
                 end
             | None -> ()
-    in Array.iteri (fun y line -> Array.iteri (fun x _ -> do_case y x) line)
+    in Array.iteri (fun y line -> Array.iteri (fun x _ -> do_case y x) line) grid
