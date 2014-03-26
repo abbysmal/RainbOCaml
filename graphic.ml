@@ -4,7 +4,7 @@ let border = 5
 let side = 120
 let size = 4 * side + 5 * border
 
-let adition = ref true
+let addition = ref true
 
 let draw_square y x color =
   set_color color;
@@ -15,7 +15,7 @@ let draw_square y x color =
     side side
 
 let draw_background () =
-  if !adition then
+  if !addition then
     begin
       set_color black;
       fill_rect 0 0 (size_x ()) (size_y ());
